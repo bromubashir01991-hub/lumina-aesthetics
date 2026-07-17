@@ -18,7 +18,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-     url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -31,6 +31,8 @@ jobs:
         run: npm install
       - name: Build project
         run: npm run build
+        env:
+          VITE_ALLOW_MUTABLE_LISTENERS: "true"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
